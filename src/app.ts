@@ -4,27 +4,19 @@
 // dados de data.json
 
 import { Product } from "./entities/product";
-import { shoppingCart } from "./entities/shoppingCart";
-import data from "../data.json";
+import { Cart } from "./entities/cart";
+//import data from "../data.json";
 
-/* interface Product {
-    name: string;  // Generalize para aceitar qualquer nome de produto
-    category: string;
-    price: number;
-    image: {
-      thumbnail: string;
-      mobile: string;
-      tablet: string;
-      desktop: string;
-    };
-  }
-  
+//inicializando o produto
+const product1 = new Product("banana", "fruta" , 10 ,"http://exemple.com");
+const product2 = new Product("maça", "fruta" , 5 ,"http://exemple.com");
 
-const products: Product[] = data;
+const cart = new Cart();
+//chamando a variavel que adiciona no carrinho
+cart.addToCart(product1)
+cart.addToCart(product2)
+console.log(cart)
+console.log(cart.products.length);
+console.log(cart.total);
 
-// Exemplo: Iterar pelos produtos e exibir os nomes no console
-products.forEach(product => {
-    console.log(product.name, product.price);
-}) */
 
-console.log(data[0].name);
