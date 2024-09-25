@@ -2,35 +2,36 @@ import { Product } from "./product";
 
 //abstrair
 export class Cart{
-    private _products:Product[] = [];
-    private _total:number = 0;
+    private  static _products:Product[] = []; //com o static não é preciso instanciar quando precisar chamar o objeto (exemplo em product)
+    private  static _total:number = 0;
       
 //nao precisa necessariamente de um contrutor porque os produtos ja estão sendo inicializado na class  
 
-    addToCart(product:Product){
+    static calculeteTotal(){
+        this._total = 0 
 
+        for (const product of this.products) {
+            this._total += product.total;
+        }
+    }
+
+   static addToCart(product:Product){
         //verifica se o mesmo produto esta no carrinho
         const productInCar = this._products.includes(product);
 
-
         if(!productInCar){
-        this._products.push(product)
-            
-        
+        this._products.push(product) //chamando o array e adicionando produto no carrinho
         }
 
-        //puxando do componente produto (como os objetos são privados, eles precisam do get no componente produto para serem puxados)
-        this._total += product.price;
-        
-     //adicionandoo produto no carrinho
+        this.calculeteTotal(); 
 
     }
 
-    get products(){
+    static get products(){
         return this._products;
     }
     
-    get total(){
+   static get total(){
         return this._total;
     }
     
