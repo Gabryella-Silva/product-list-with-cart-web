@@ -3,16 +3,33 @@ import { Product } from "./product";
 //abstrair
 export class Cart{
     private  static _products:Product[] = []; //com o static não é preciso instanciar quando precisar chamar o objeto (exemplo em product)
-    private  static _total:number = 0;
+    private  static _orderTotal:number = 0;
+    private static _totalQuantity: number = 0;
       
 //nao precisa necessariamente de um contrutor porque os produtos ja estão sendo inicializado na class  
 
+    toCarHtml(){
+        const cart =document.getElementById("cart");
+
+        if(!cart)return
+
+        
+    }
+
     static calculeteTotal(){
-        this._total = 0 
+        this._orderTotal = 0; 
+        this._totalQuantity = 0;
 
         for (const product of this.products) {
-            this._total += product.total;
+            this._orderTotal += product.total;
+            this._totalQuantity += product.quantity;
         }
+    }
+
+    static removeProduct(product:Product){
+    //remove um produto do carrinho, filtrando pelo produto em questão
+    this._products = this._products.filter((item) => item.id !== product.id);
+        this.calculeteTotal();
     }
 
    static addToCart(product:Product){
@@ -32,7 +49,7 @@ export class Cart{
     }
     
    static get total(){
-        return this._total;
+        return this._orderTotal;
     }
     
 }
