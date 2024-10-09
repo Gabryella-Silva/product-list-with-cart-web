@@ -42,7 +42,48 @@ export class Cart{
 
         this.calculeteTotal(); 
 
+         // Atualiza o carrinho de compras no HTML
+         this.toHTML();
+    
+
     }
+        static toHTML(){
+            const cartContainerHTML = document.getElementById("cart-container");
+
+            if(!cartContainerHTML) return;
+
+            const totalQuantityHTML = cartContainerHTML.querySelector("total-quantity-text")
+
+            if(totalQuantityHTML) return;
+            totalQuantityHTML.textContent = this._totalQuantity.toString();
+
+            let ulProductsHTML = cartContainerHTML.querySelector("ul");
+
+            if (ulProductsHTML){
+                ulProductsHTML.innerHTML = "";
+
+            }else{
+                ulProductsHTML = document.querySelector("ul");
+            }
+
+            for (const product of this._products) {
+                const liProductHTML = document.createElement("li")
+                
+                const productHTML = `
+                <span>${product.name}</span>
+                <div>
+                  <span>${product.quantity}x</span>
+                  <span>@$${product.price}</span>
+                  <span>$${product.total}</span>
+                </div>
+              `;
+
+              liProductHTML.innerHTML = productHTML;
+              ulProductsHTML?.appendChild(ulProductsHTML);
+            }
+                cartContainerHTML.appendChild(ulProductsHTML);
+        }
+
 
     static get products(){
         return this._products;
@@ -52,4 +93,5 @@ export class Cart{
         return this._orderTotal;
     }
     
+
 }

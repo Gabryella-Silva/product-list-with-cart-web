@@ -53,7 +53,9 @@ export class Product {
   }
 
 
-
+  get name{
+    return this._name;
+  }
 
   get id(){
     return this._id;
@@ -64,9 +66,14 @@ export class Product {
   }
 
   get total(){
-   return this._total;
+    return this._total;
   }
+  
+  get price(){
+    return this._price;
 
+  }
+  
   calculateTotal(){
     this._total =this._quantity * this._price //fez o método para calcular o quantidade multiplicada pelo preço
   }
@@ -84,9 +91,5 @@ export class Product {
 
   }
 
-  get price(){
-    return this._price;
-
-  }
 }
 
